@@ -223,7 +223,7 @@ namespace Microsoft.WindowsAPICodePack.Shell
         /// <summary>
         /// Gets the PID List (PIDL) for this ShellItem.
         /// </summary>
-        internal virtual IntPtr PIDL
+        public virtual IntPtr PIDL
         {
             get
             {
