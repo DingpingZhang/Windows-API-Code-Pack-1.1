@@ -28,7 +28,7 @@ namespace Microsoft.WindowsAPICodePack.Shell
         /// <summary>
         /// Indicates whether this feature is supported on the current platform.
         /// </summary>
-        new public static bool IsPlatformSupported
+        public new static bool IsPlatformSupported
         {
             get
             {

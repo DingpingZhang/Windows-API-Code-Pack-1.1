@@ -133,11 +133,11 @@ namespace Microsoft.WindowsAPICodePack.Dialogs
 
 		// All the pinvoke goo...
 		[DllImport("Kernel32.dll")]
-		private extern static IntPtr CreateActCtx(ref ACTCTX actctx);
+		private static extern IntPtr CreateActCtx(ref ACTCTX actctx);
 		[DllImport("Kernel32.dll")]
-		private extern static bool ActivateActCtx(IntPtr hActCtx, out UIntPtr lpCookie);
+		private static extern bool ActivateActCtx(IntPtr hActCtx, out UIntPtr lpCookie);
 		[DllImport("Kernel32.dll")]
-		private extern static bool DeactivateActCtx(uint dwFlags, UIntPtr lpCookie);
+		private static extern bool DeactivateActCtx(uint dwFlags, UIntPtr lpCookie);
 
 		private const int ACTCTX_FLAG_ASSEMBLY_DIRECTORY_VALID = 0x004;
 

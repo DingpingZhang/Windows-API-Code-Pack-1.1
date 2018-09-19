@@ -749,7 +749,7 @@ namespace Microsoft.WindowsAPICodePack.Shell
         /// Retrieves the collection enumerator.
         /// </summary>
         /// <returns>The enumerator.</returns>
-        new public IEnumerator<ShellFileSystemFolder> GetEnumerator()
+        public new IEnumerator<ShellFileSystemFolder> GetEnumerator()
         {
             return ItemsList.GetEnumerator();
         }
@@ -888,7 +888,7 @@ namespace Microsoft.WindowsAPICodePack.Shell
         /// <summary>
         /// Indicates whether this feature is supported on the current platform.
         /// </summary>
-        new public static bool IsPlatformSupported
+        public new static bool IsPlatformSupported
         {
             get
             {

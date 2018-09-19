@@ -42,7 +42,7 @@ namespace Microsoft.WindowsAPICodePack.Shell
         /// </summary>
         /// <param name="path">The file or folder path</param>
         /// <returns>ShellFile object created using given file path.</returns>
-        static public ShellFile FromFilePath(string path)
+        public static ShellFile FromFilePath(string path)
         {
             return new ShellFile(path);
         }
@@ -54,10 +54,7 @@ namespace Microsoft.WindowsAPICodePack.Shell
         /// <summary>
         /// The path for this file
         /// </summary>
-        virtual public string Path
-        {
-            get { return this.ParsingName; }
-        }
+        public virtual string Path => ParsingName;
 
         #endregion
     }

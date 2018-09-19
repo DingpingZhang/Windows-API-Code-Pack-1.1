@@ -9,30 +9,30 @@ namespace Microsoft.WindowsAPICodePack.Shell.PropertySystem
     internal static class PropVariantNativeMethods
     {
         [DllImport("Ole32.dll", PreserveSig = false)] // returns hresult
-        internal extern static void PropVariantClear([In, Out] PropVariant pvar);
+        internal static extern void PropVariantClear([In, Out] PropVariant pvar);
 
         [DllImport("OleAut32.dll", PreserveSig = true)] // psa is actually returned, not hresult
-        internal extern static IntPtr SafeArrayCreateVector(ushort vt, int lowerBound, uint cElems);
+        internal static extern IntPtr SafeArrayCreateVector(ushort vt, int lowerBound, uint cElems);
 
         [DllImport("OleAut32.dll", PreserveSig = false)] // returns hresult
-        internal extern static IntPtr SafeArrayAccessData(IntPtr psa);
+        internal static extern IntPtr SafeArrayAccessData(IntPtr psa);
 
         [DllImport("OleAut32.dll", PreserveSig = false)] // returns hresult
-        internal extern static void SafeArrayUnaccessData(IntPtr psa);
+        internal static extern void SafeArrayUnaccessData(IntPtr psa);
 
         [DllImport("OleAut32.dll", PreserveSig = true)] // retuns uint32
-        internal extern static uint SafeArrayGetDim(IntPtr psa);
+        internal static extern uint SafeArrayGetDim(IntPtr psa);
 
         [DllImport("OleAut32.dll", PreserveSig = false)] // returns hresult
-        internal extern static int SafeArrayGetLBound(IntPtr psa, uint nDim);
+        internal static extern int SafeArrayGetLBound(IntPtr psa, uint nDim);
 
         [DllImport("OleAut32.dll", PreserveSig = false)] // returns hresult
-        internal extern static int SafeArrayGetUBound(IntPtr psa, uint nDim);
+        internal static extern int SafeArrayGetUBound(IntPtr psa, uint nDim);
 
         // This decl for SafeArrayGetElement is only valid for cDims==1!
         [DllImport("OleAut32.dll", PreserveSig = false)] // returns hresult
         [return: MarshalAs(UnmanagedType.IUnknown)]
-        internal extern static object SafeArrayGetElement(IntPtr psa, ref int rgIndices);
+        internal static extern object SafeArrayGetElement(IntPtr psa, ref int rgIndices);
 
         [DllImport("propsys.dll", CharSet = CharSet.Unicode, SetLastError = true, PreserveSig = false)]
         internal static extern void InitPropVariantFromPropVariantVectorElem([In] PropVariant propvarIn, uint iElem, [Out] PropVariant ppropvar);

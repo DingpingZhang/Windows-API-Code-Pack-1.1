@@ -125,7 +125,7 @@ namespace Microsoft.WindowsAPICodePack.Controls.WindowsForms
             CoreNativeMethods.SendMessage(button.Handle, ShellNativeMethods.SetNote, 0, text);
         }
 
-        static internal void SetShieldIcon(System.Windows.Forms.Button Button, bool Show)
+        internal static void SetShieldIcon(System.Windows.Forms.Button Button, bool Show)
         {
             IntPtr fRequired = new IntPtr(Show ? 1 : 0);
             CoreNativeMethods.SendMessage(

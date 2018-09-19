@@ -14,7 +14,7 @@ namespace Microsoft.WindowsAPICodePack.Shell
     /// <summary>
     /// The base class for all Shell objects in Shell Namespace.
     /// </summary>
-    abstract public class ShellObject : IDisposable, IEquatable<ShellObject>
+    public abstract class ShellObject : IDisposable, IEquatable<ShellObject>
     {
 
         #region Public Static Methods
@@ -93,7 +93,7 @@ namespace Microsoft.WindowsAPICodePack.Shell
         /// </summary>
         /// <exception cref="System.Runtime.InteropServices.ExternalException">If the native object cannot be created.
         /// The ErrorCode member will contain the external error code.</exception>
-        virtual internal IShellItem2 NativeShellItem2
+        internal virtual IShellItem2 NativeShellItem2
         {
             get
             {
@@ -114,7 +114,7 @@ namespace Microsoft.WindowsAPICodePack.Shell
         /// <summary>
         /// Return the native ShellFolder object
         /// </summary>
-        virtual internal IShellItem NativeShellItem
+        internal virtual IShellItem NativeShellItem
         {
             get { return NativeShellItem2; }
         }
@@ -175,7 +175,7 @@ namespace Microsoft.WindowsAPICodePack.Shell
         /// <summary>
         /// Gets the parsing name for this ShellItem.
         /// </summary>
-        virtual public string ParsingName
+        public virtual string ParsingName
         {
             get
             {
@@ -194,7 +194,7 @@ namespace Microsoft.WindowsAPICodePack.Shell
         /// <summary>
         /// Gets the normal display for this ShellItem.
         /// </summary>
-        virtual public string Name
+        public virtual string Name
         {
             get
             {
