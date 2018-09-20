@@ -1,16 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using Microsoft.WindowsAPICodePack.Shell;
 
@@ -19,7 +9,7 @@ namespace ShellObjectWatcherSampleWPF
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window, IDisposable
+    public partial class MainWindow : IDisposable
     {
         private ShellObjectWatcher _watcher = null;
         public MainWindow()
@@ -29,10 +19,12 @@ namespace ShellObjectWatcherSampleWPF
 
         private void btnBrowse_Click(object sender, RoutedEventArgs e)
         {
-            CommonOpenFileDialog cfd = new CommonOpenFileDialog();
-            cfd.AllowNonFileSystemItems = true;
-            cfd.EnsureReadOnly = true;
-            cfd.IsFolderPicker = true;
+            var cfd = new CommonOpenFileDialog
+            {
+                AllowNonFileSystemItems = true,
+                EnsureReadOnly = true,
+                IsFolderPicker = true
+            };
 
             if (cfd.ShowDialog() == CommonFileDialogResult.Ok)
             {
@@ -42,9 +34,11 @@ namespace ShellObjectWatcherSampleWPF
 
         private void btnBrowseFile_Click(object sender, RoutedEventArgs e)
         {
-            CommonOpenFileDialog cfd = new CommonOpenFileDialog();
-            cfd.AllowNonFileSystemItems = true;
-            cfd.EnsureReadOnly = true;
+            var cfd = new CommonOpenFileDialog
+            {
+                AllowNonFileSystemItems = true,
+                EnsureReadOnly = true
+            };
 
             if (cfd.ShowDialog() == CommonFileDialogResult.Ok)
             {
@@ -54,7 +48,7 @@ namespace ShellObjectWatcherSampleWPF
 
         private void StartWatcher(ShellObject shellObject)
         {
-            if (_watcher != null) { _watcher.Dispose(); }
+            _watcher?.Dispose();
             eventStack.Children.Clear();
 
             txtPath.Text = shellObject.ParsingName;
@@ -68,7 +62,7 @@ namespace ShellObjectWatcherSampleWPF
         void AllEventsHandler(object sender, ShellObjectNotificationEventArgs e)
         {
             eventStack.Children.Add(
-                new Label()
+                new Label
                 {
                     Content = FormatEvent(e.ChangeType, e)
                 });
@@ -114,19 +108,13 @@ namespace ShellObjectWatcherSampleWPF
 
         #region IDisposable Members
 
-        public void Dispose()
-        {
-            if (_watcher != null)
-            {
-                _watcher.Dispose();
-            }
-        }
+        public void Dispose() => _watcher?.Dispose();
 
         #endregion
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (_watcher != null) { _watcher.Dispose(); }                        
+            _watcher?.Dispose();
         }
 
 
