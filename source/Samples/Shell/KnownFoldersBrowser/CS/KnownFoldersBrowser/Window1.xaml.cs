@@ -31,12 +31,7 @@ namespace Microsoft.WindowsAPICodePack.Samples.KnownFoldersBrowser
 
         void NavigateExplorerBrowser(object sender, SelectionChangedEventArgs args)
         {
-            IKnownFolder folder = (IKnownFolder)((ListBox)sender).SelectedItem;
-
-            if (folder == null)
-            {
-                folder = (IKnownFolder)ShellFileSystemFolder.FromParsingName(KnownFolders.Desktop.ParsingName);
-            }
+            IKnownFolder folder = (IKnownFolder)((ListBox)sender).SelectedItem ?? (IKnownFolder)ShellObject.FromParsingName(KnownFolders.Desktop.ParsingName);
 
             UpdateProperties(folder);
         }

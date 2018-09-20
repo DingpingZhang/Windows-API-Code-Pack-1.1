@@ -15,18 +15,20 @@ namespace TaskbarDemo
             bool unregister, string progId, bool registerInHKCU,
             string appId, string openWith, string[] extensions)
         {
-            ProcessStartInfo psi = new ProcessStartInfo("RegistrationHelper.exe");
-            psi.Arguments =
-                string.Format("{0} {1} {2} \"{3}\" {4} {5}",
+            ProcessStartInfo psi = new ProcessStartInfo("RegistrationHelper.exe")
+            {
+                Arguments = string.Format("{0} {1} {2} \"{3}\" {4} {5}",
                     progId, // 0
                     registerInHKCU, // 1 
                     appId, // 2
                     openWith,
                     unregister,
-                    string.Join(" ", extensions));
-            psi.UseShellExecute = true;
-            psi.Verb = "runas"; //Launch elevated
-            psi.WindowStyle = ProcessWindowStyle.Hidden;
+                    string.Join(" ", extensions)),
+                UseShellExecute = true,
+                Verb = "runas",
+                WindowStyle = ProcessWindowStyle.Hidden
+            };
+            //Launch elevated
 
             try
             {

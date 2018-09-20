@@ -372,8 +372,7 @@ namespace Microsoft.WindowsAPICodePack.Samples.SearchApp
                     // For each of our ShellObject,
                     // create a SearchItem object
                     // We will bind these items to the ListView
-                    SearchItem item = new SearchItem();
-                    item.Name = so.Name;
+                    SearchItem item = new SearchItem {Name = so.Name};
 
                     // We must freeze the ImageSource before passing across threads
                     BitmapSource thumbnail = so.Thumbnail.MediumBitmapSource;
@@ -384,7 +383,7 @@ namespace Microsoft.WindowsAPICodePack.Samples.SearchApp
                     item.Title = so.Properties.System.Title.Value;
                     item.Keywords = so.Properties.System.Keywords.Value;
                     item.Copyright = so.Properties.System.Copyright.Value;
-                    item.TotalPages = so.Properties.System.Document.PageCount.Value.HasValue ? so.Properties.System.Document.PageCount.Value.Value : 0;
+                    item.TotalPages = so.Properties.System.Document.PageCount.Value ?? 0;
                     item.Rating = so.Properties.System.SimpleRating.Value.HasValue ? (int)so.Properties.System.SimpleRating.Value.Value : 0;
                     item.ParsingName = so.ParsingName;
 

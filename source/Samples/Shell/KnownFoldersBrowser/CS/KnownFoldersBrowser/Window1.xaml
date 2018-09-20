@@ -67,6 +67,6 @@
             </ListView>
         </Grid>
 
-        <ListBox Name="knownFoldersListBox" ItemsSource="{Binding}" SelectionChanged="NavigateExplorerBrowser" SelectedIndex="0"/>
+        <ListBox Name="knownFoldersListBox" ItemsSource="{x:Static WB:KnownFolders.All}" SelectionChanged="NavigateExplorerBrowser" SelectedIndex="0"/>
     </Grid>
 </Window>
