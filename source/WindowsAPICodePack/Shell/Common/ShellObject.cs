@@ -14,7 +14,7 @@ namespace Microsoft.WindowsAPICodePack.Shell
     /// <summary>
     /// The base class for all Shell objects in Shell Namespace.
     /// </summary>
-    public abstract class ShellObject : IDisposable, IEquatable<ShellObject>
+    public abstract class ShellObject : IDisposable, IEquatable<ShellObject>, IComparable<ShellObject>
     {
 
         #region Public Static Methods
@@ -239,6 +239,12 @@ namespace Microsoft.WindowsAPICodePack.Shell
             {
                 this._internalPIDL = value;
             }
+        }
+
+        int IComparable<ShellObject>.CompareTo(ShellObject other)
+        {
+            var hr = NativeShellItem.Compare(other.NativeShellItem, SICHINTF.SICHINT_DISPLAY, out int result);
+            return CoreErrorHelper.Succeeded(hr) ? result : 0;
         }
 
         /// <summary>
