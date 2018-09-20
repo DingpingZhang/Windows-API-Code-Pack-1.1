@@ -181,6 +181,8 @@
     <Compile Include="Interop\Common\IntPtrExtensions.cs" />
     <Compile Include="Interop\Common\ShellNativeStructs.cs" />
     <Compile Include="Interop\Common\WindowNativeMethods.cs" />
+    <Compile Include="Interop\ShellContextMenu\ShellContextMenuCOMInterfaces.cs" />
+    <Compile Include="Interop\ShellContextMenu\ShellContextMenuNativeMethods.cs" />
     <Compile Include="Interop\ShellObjectWatcher\ShellObjectWatcherNativeMethods.cs" />
     <Compile Include="PropertySystem\PropertySystemException.cs" />
     <Compile Include="Interop\StockIcons\StockIconsNativeMethods.cs" />
@@ -256,6 +258,8 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="ShellContextMenu\ShellContextMenu.cs" />
+    <Compile Include="ShellContextMenu\ShellContextMenuMessageHandler.cs" />
     <Compile Include="ShellObjectWatcher\ChangeNotifyEventManager.cs" />
     <Compile Include="ShellObjectWatcher\ChangeNotifyLock.cs" />
     <Compile Include="ShellObjectWatcher\MessageListener.cs" />

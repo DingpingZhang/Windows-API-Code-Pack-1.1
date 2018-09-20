@@ -354,8 +354,15 @@ namespace Microsoft.WindowsAPICodePack.Shell
         void GetAttributesOf([In] uint cidl, [In] IntPtr apidl, [In, Out] ref uint rgfInOut);
 
 
-        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        void GetUIObjectOf([In] IntPtr hwndOwner, [In] uint cidl, [In] IntPtr apidl, [In] ref Guid riid, [In, Out] ref uint rgfReserved, out IntPtr ppv);
+        //[MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        //void GetUIObjectOf([In] IntPtr hwndOwner, [In] uint cidl, [In, MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] IntPtr[] apidl, [In, MarshalAs(UnmanagedType.LPStruct)] ref Guid riid, [In, Out] ref uint rgfReserved, out IntPtr ppv);
+
+        void GetUIObjectOf(IntPtr hwndOwner, UInt32 cidl,
+            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)]
+            IntPtr[] apidl,
+            [MarshalAs(UnmanagedType.LPStruct)] Guid riid,
+            UInt32 rgfReserved,
+            out IntPtr ppv);
 
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         void GetDisplayNameOf([In] ref IntPtr pidl, [In] uint uFlags, out IntPtr pName);
