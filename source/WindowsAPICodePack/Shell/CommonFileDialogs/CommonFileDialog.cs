@@ -36,6 +36,9 @@ namespace Microsoft.WindowsAPICodePack.Dialogs
                 }
             }
         }
+        private Dictionary<int, string> customOkItems;
+		private int nextOkItemId = 0;
+		private const int OKITEMS = 0;
         private Collection<string> filenames;
         internal readonly Collection<IShellItem> items;
         internal DialogShowState showState = DialogShowState.PreShow;
@@ -61,6 +64,7 @@ namespace Microsoft.WindowsAPICodePack.Dialogs
                 throw new PlatformNotSupportedException(LocalizedMessages.CommonFileDialogRequiresVista);
             }
 
+            customOkItems = new Dictionary<int, string>();
             filenames = new Collection<string>();
             filters = new CommonFileDialogFilterCollection();
             items = new Collection<IShellItem>();
@@ -434,6 +438,25 @@ namespace Microsoft.WindowsAPICodePack.Dialogs
         }
 
         /// <summary>
+        /// Gets the subitem that was clicked for a drop down OK button.
+        /// </summary>
+        public int SelectedOkButtonItem
+		{
+			get
+			{
+				if(customize == null)
+					customize = (IFileDialogCustomize)(nativeDialog);
+				
+				int tmp;
+				
+				customize.GetSelectedControlItem(OKITEMS, out tmp);
+				
+				return tmp;
+				
+			}
+		}
+
+        /// <summary>
         /// Adds a location, such as a folder, library, search connector, or known folder, to the list of
         /// places available for a user to open or save items. This method actually adds an item
         /// to the <b>Favorite Links</b> or <b>Places</b> section of the Open/Save dialog.
@@ -554,6 +577,20 @@ namespace Microsoft.WindowsAPICodePack.Dialogs
             get { return cookieIdentifier; }
             set { cookieIdentifier = value; }
         }
+
+        /// <summary>
+        /// Adds an option to the OK button.
+        /// </summary>
+        /// <param name="text">The text of the item.</param>
+        /// <returns>The item's ID.</returns>
+        /// <remarks>You must keep the ID available as it is the only way to determine what is clicked (through the <see cref="SelectedOkButtonItem"/> property).</remarks>
+        public int AddOKButtonChoice(string text)
+		{
+			int tmpId = nextOkItemId;
+			nextOkItemId++;
+			customOkItems.Add(tmpId, text);
+			return tmpId;
+		}
 
         /// <summary>
         /// Displays the dialog.
@@ -766,6 +803,19 @@ namespace Microsoft.WindowsAPICodePack.Dialogs
 
             // Set the default filename
             dialog.SetFileName(DefaultFileName);
+
+            if (customOkItems.Count > 0)
+			{
+				IFileDialogCustomize cust = (IFileDialogCustomize)(nativeDialog);
+			
+				cust.EnableOpenDropDown(OKITEMS);
+			
+				foreach(var kvp in customOkItems)
+				{
+					cust.AddControlItem(OKITEMS, kvp.Key, kvp.Value);
+				}
+			
+			}
         }
 
         private ShellNativeMethods.FileOpenOptions CalculateNativeDialogOptionFlags()
